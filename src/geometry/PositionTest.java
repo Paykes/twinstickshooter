@@ -4,4 +4,5 @@ public class PositionTest {
 		assertThat(Position.ORIGIN.getX()).isEqualTo(0);
 		assertThat(Position.ORIGIN.getX()).isEqualTo(0);
 	}
+
 }
