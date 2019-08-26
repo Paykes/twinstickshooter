@@ -7,9 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Field {
-    private ArrayList<Thing> Field = new ArrayList<Thing>();
+    private List<Thing> thingsList = new ArrayList<Thing>();
 
-    public Field addThing(Thing, Position) {
-        Field.add(Thing);
+    public void addThing(Thing thing) {
+        thingsList.add(thing);
+    }
+
+    public void removeThing(Thing thing) {
+        thingsList.remove(thing);
+    }
+
+    public int getThingCount() {
+        return thingsList.size();
+    }
+
+    public void tick(int ticks) {
+        for (Thing thing : thingsList) {
+            thing.move(ticks);
+        }
     }
 }

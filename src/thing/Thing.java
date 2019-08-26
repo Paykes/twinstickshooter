@@ -13,14 +13,17 @@ public class Thing {
     }
 
     public Position getPosition() {
+
         return position;
     }
 
     public void setVelocity(float dx, float dy) {
+
         this.velocity = new Vector(dx, dy);
     }
 
     public void move(int ticks) {
+
         this.position = velocity.mult(ticks / 1000f).addTo(position);
     }
 }
