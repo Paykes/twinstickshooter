@@ -1,0 +1,84 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{amssymb}
+
+\title{COMP3506 Homework 4}
+\author{Dominic Pincus}
+\date{\today}
+
+\begin{document}
+\maketitle
+\newpage
+
+\section{Theoretical Algorithms and Data Structures}
+
+\begin{table}[htp]
+\caption{Data Structures}
+\begin{center}
+\begin{tabular}{l l}
+
+items & HashMap id $\mapsto$ feeditem \\
+userDateIndex & HashMap username $\mapsto$ TreeMap date $\mapsto$ id \\
+upVotesIndex & TreeMap upvotes $\mapsto$ ArrayList id \\
+pointers & HashMap character $\mapsto$ ArrayList TrieNode \\
+root & TrieNode \\
+ids & TreeSet \\
+
+\end{tabular}
+\end{center}
+\label{default}
+\end{table}
+
+\section{Worst Case Time Complexity}
+
+Variables used in complexity functions.
+
+\begin{itemize}
+\item $n$ is number of total feed items
+\item $f$ is number of feed items returned by search
+\item $c$ total number of characters across all feed items
+\item $p$ length of input pattern
+\end{itemize}
+
+
+\begin{table}[htp]
+\caption{Worst Case Time Complexity}
+\begin{center}
+\begin{tabular}{l p{5 cm} p{5 cm}}
+
+FeedAnalyser Constructor &  $O(n^2 c p \log_2 n$ & $O(p n \log_2 nb) TrieNode.addText\\
+TrieNode.addText & HashMap username $\mapsto$ TreeMap date $\mapsto$ id \\
+getPostsBetweenDates &  $O(n + \log_2 n + f)$ & $O(n)$ for TreeMap.get, $O(\log n)$ TreeMap.subMap.values, $O(f)$ ArrayList.add $f$ times \\
+getPostAfterDate & $O(n + \log_2n)$ & $O(n)$HashMap.get, $(O(\log_2) n)$ TreeMap.ceilingEntry \\
+getHighestUpvote & $O(n + \log_2 n)$ & $O(\log_2 n)$ TreeMap.descendingValues, $O(n)$ HashMap.get \\
+getPostsWithText &  $O(c (p + n) \log_2 n + n^2$)\\
+
+\end{tabular}
+\end{center}
+\label{default}
+\end{table}
+
+\section{Expected Case Time Complexity}
+
+
+\begin{table}[htp]
+\caption{Worst Case Time Complexity}
+\begin{center}
+\begin{tabular}{l p{5 cm} p{5 cm}}
+
+FeedAnalyser Constructor &  $O(n^2 c p \log_2 n$ & $O(p n \log_2 nb) TrieNode.addText\\
+TrieNode.addText & HashMap username $\mapsto$ TreeMap date $\mapsto$ id \\
+getPostsBetweenDates &  $O(n + \log_2 n + f)$ & $O(n)$ for TreeMap.get, $O(\log n)$ TreeMap.subMap.values, $O(f)$ ArrayList.add $f$ times \\
+getPostAfterDate & $O(n + \log_2n)$ & $O(n)$HashMap.get, $(O(\log_2) n)$ TreeMap.ceilingEntry \\
+getHighestUpvote & $O(n + \log_2 n)$ & $O(\log_2 n)$ TreeMap.descendingValues, $O(n)$ HashMap.get \\
+getPostsWithText &  $O(c (p + n) \log_2 n + n^2$)\\
+
+\end{tabular}
+\end{center}
+\label{default}
+\end{table}
+
+\section{Justification}
+
+\section{Alternative Implementations}
+
+\end{document}  
