@@ -7,83 +7,71 @@
 
 \begin{document}
 \maketitle
-\newpage
 
 \section{Theoretical Algorithms and Data Structures}
 
-\begin{table}[htp]
-\caption{Data Structures}
-\begin{center}
-\begin{tabular}{l l}
+\begin{description}
 
-items & HashMap id $\mapsto$ feeditem \\
-userDateIndex & HashMap username $\mapsto$ TreeMap date $\mapsto$ id \\
-upVotesIndex & TreeMap upvotes $\mapsto$ ArrayList id \\
-pointers & HashMap character $\mapsto$ ArrayList TrieNode \\
-root & TrieNode \\
-ids & TreeSet \\
+\item items: \texttt{HashMap} id $\mapsto$ feeditem 
+\item userDateIndex: \texttt{HashMap} username $\mapsto$ \texttt{TreeMap} date $\mapsto$ id 
+\item upVotesIndex: \texttt{TreeMap} upvotes $\mapsto$ \texttt{ArrayList} id 
+\item pointers: \texttt{HashMap} character $\mapsto$ \texttt{ArrayList} \texttt{TrieNode} 
+\item root: \texttt{TrieNode} 
+\item ids: \texttt{TreeSet} 
 
-\end{tabular}
-\end{center}
-\label{default}
-\end{table}
+\end{description}
 
 \section{Worst Case Time Complexity}
 
 \paragraph{Assumptions}
 
-The getPostsWithText search implementation assumes that the patterns should match anywhere in the string and that the pattern will not contain spaces, so the text can be split into words.
+The \texttt{getPostsWithText} search implementation assumes that the patterns should match anywhere in the string and that the pattern will not contain spaces, so the text can be split into words.
 
 The getPostsBetweenDates search implementation assumes that there can only be one post for a user at a given date/time.
 
-Variables used in complexity functions.
+\subsection{Variables used in complexity functions}
 
-\begin{itemize}
+\begin{description}
+
 \item $n$ is number of total feed items
 \item $f$ is number of feed items returned by search
 \item $c$ total number of characters across all feed items
 \item $p$ length of input pattern
-\end{itemize}
 
+\end{description}
 
-\begin{table}[htp]
-\caption{Worst Case Time Complexity}
-\begin{center}
-\begin{tabular}{l p{5 cm} p{5 cm}}
+\subsection{Worst case time complexity}
 
-FeedAnalyser Constructor &  $O(c n (n + \log_2 n$ & $O(p (n + \log_2 n))$ TrieNode.addText, worst case every word is 1 character\\
-getPostsBetweenDates &  $O(n + \log_2 n + f)$ & $O(n)$ for TreeMap.get, $O(\log n)$ TreeMap.subMap.values, $O(f)$ ArrayList.add $f$ times \\
-getPostAfterDate & $O(n + \log_2n)$ & $O(n)$HashMap.get, $(O(\log_2) n)$ TreeMap.ceilingEntry \\
-getHighestUpvote & $O(n + \log_2 n)$ & $O(\log_2 n)$ TreeMap.descendingValues, $O(n)$ HashMap.get, worst case is first call \\
-getPostsWithText &  $O(c (p + n) \log_2 n + n^2)$ & $O(p \log_2 n)$ getInternalItems, $O(\log_2 n)$ TreeSet.add, worst case patterns matches every character \\
+\begin{description}
 
-\end{tabular}
-\end{center}
-\label{default}
-\end{table}
+\item FeedAnalyser Constructor: $O(c n (n + \log_2 n))$ \\
+$O(p (n + \log_2 n))$ \\texttt{TrieNode.addText} \\ worst case every word is 1 character 
+\item getPostsBetweenDates: $O(n + \log_2 n + f)$ \\
+$O(n)$ for TreeMap.get, $O(\log n)$ TreeMap.subMap.values, $O(f)$ ArrayList.add $f$ times 
+\item getPostAfterDate: $O(n + \log_2n)$ \\
+$O(n)$HashMap.get, $(O(\log_2) n)$ TreeMap.ceilingEntry 
+\item getHighestUpvote: $O(n + \log_2 n)$ \\
+$O(\log_2 n)$ TreeMap.descendingValues, $O(n)$ HashMap.get, worst case is first call 
+\item getPostsWithText: $O(c (p + n) \log_2 n + n^2)$ \\
+$O(p \log_2 n)$ getInternalItems, $O(\log_2 n)$ TreeSet.add, worst case patterns matches every character 
+
+\end{description}
 
 \section{Expected Case Time Complexity}
 
+\begin{description}
 
-\begin{table}[htp]
-\caption{Expected Time Complexity}
-\begin{center}
-\begin{tabular}{l p{5 cm} p{5 cm}}
+\item FeedAnalyser Constructor: $O(c n \log_2 n)$ \\ $O(p \log_2 n)$ \\texttt{TrieNode.addText} because expected \texttt{HashMap} is $O(1)$ 
+\item getPostsBetweenDates: $O(\log_2 n + f)$ \\ $O(1)$ for TreeMap.get, $O(\log n)$ TreeMap.subMap.values \\ $O(f)$ \texttt{ArrayList.add} $f$ times 
+\item getPostAfterDate: $O(\log_2n)$ \\ $O(1)$HashMap.get, $(O(\log_2) n)$ \\texttt{TreeMap.ceilingEntry}
+\item getHighestUpvote: $O(1)$ \\ $O(1)$HashMap.get, in the expected case, the algorithm is not creating a new iterator 
+\item getPostsWithText:  $O(p \log_2 n)$ \\ $O(p \log_2 n)$ getInternalItems, expected case small number of posts returned, small number of characters searched 
 
-FeedAnalyser Constructor &  $Oc n \log_2 n$ & $O(p \log_2 n)$ TrieNode.addText because expected HashMap is $O(1)$\\
-getPostsBetweenDates &  $O(\log_2 n + f)$ & $O(1)$ for TreeMap.get, $O(\log n)$ TreeMap.subMap.values, $O(f)$ ArrayList.add $f$ times \\
-getPostAfterDate & $O(\log_2n)$ & $O(1)$HashMap.get, $(O(\log_2) n)$ TreeMap.ceilingEntry \\
-getHighestUpvote & $O(1)$ & $O(1)$HashMap.get, in the expected case, the algorithm is not creating a new iterator, \\
-getPostsWithText &  $O(p \log_2 n)$ & $O(p \log_2 n)$ getInternalItems, expected case small number of posts returned, small number of characters searched \\
-
-\end{tabular}
-\end{center}
-\label{default}
-\end{table}
+\end{description}
 
 \section{Justification}
 
-Each algorithm has been chosen based on fastest time complexity, trading against memory efficiency. Many of the solutions may have unrealistic and inefficient memory usage. The general principle is to use a HashMap wherever possible due to constant time expected performance. Where the algorithm relies on the key set being sorted. 
+Each algorithm has been chosen based on fastest time complexity, trading against memory efficiency. Many of the solutions may have unrealistic and inefficient memory usage. The general principle is to use a \\texttt{HashMap} wherever possible due to constant time expected performance. Where the algorithm relies on the key set being sorted. 
 
 \paragraph{items \texttt{HashMap}}
 
@@ -91,7 +79,7 @@ All structures used in searches store the id (long) of feeditems rather than a r
 
 \paragraph{getPostsBetweenDates}
 
-This algorithm uses a map from user name to a map from date to feed item. The user name map is a HashMap as it doesn't need to be sorted. The Date map is a TreeMap because this supports the subMap method that iterates within a range. The result is added to an ArrayList because it doesn't need to be sorted and to take advantage of constant time add.
+This algorithm uses a map from user name to a map from date to feed item. The user name map is a \\texttt{HashMap} as it doesn't need to be sorted. The Date map is a \\texttt{TreeMap} because this supports the subMap method that iterates within a range. The result is added to an ArrayList because it doesn't need to be sorted and to take advantage of constant time add.
 
 \paragraph{getPostAfterDate}
 
@@ -99,7 +87,7 @@ This algorithm the double map from the previous search. Instead of subMap, ceili
 
 \paragraph{getHighestUpvote}
 
-This algorithm uses a TreeMap from upvotes to a ArrayList of ids. This is essentially a multimap implementation (as there is no multimap in the JCF). The TreeMap automatically orders by upvotes. This algorithm uses 2 iterators. The first is constructed on first call and iterators through the upvotes in descending order. There is a second iterator that iterates through the ids for feed items for the same number of upvotes This structure allows constant time in the expected case.
+This algorithm uses a \\texttt{TreeMap} from upvotes to a ArrayList of ids. This is essentially a multimap implementation (as there is no multimap in the JCF). The \\texttt{TreeMap} automatically orders by upvotes. This algorithm uses 2 iterators. The first is constructed on first call and iterators through the upvotes in descending order. There is a second iterator that iterates through the ids for feed items for the same number of upvotes This structure allows constant time in the expected case.
 
 \paragraph{getPostsWithText}
 
